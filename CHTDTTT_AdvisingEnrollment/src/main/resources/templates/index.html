@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Bootstrap CSS -->
+	<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+	<link rel="stylesheet" th:href="@{/css/index.css}">
+	<title>Home Page</title>
+</head>
+<body>
+	
+	<!-- Importing NavBar -->
+	<div th:insert="~{navbar.html :: navbar}"></div>
+
+	<!-- Main Container Start -->
+	<div class="main-container container py-5 px-4">
+		<div class="image-box">
+			<img th:src="@{/img/exam.svg}" alt="image">
+		</div>
+		<div class="text-box">
+			<h1 class="mb-5 text-center">CHÀO MỪNG</h1>
+			<h4>CÁC THÀNH VIÊN</h4>
+			<h5>Đỗ Hùng Cường</h5>
+			<h5>Lê Huy Duy</h5>
+			<h5>Nguyễn Tuấn Anh</h5>
+			<form class="card bg-dark py-5 px-4" action="/quiz" method="POST">
+				
+				<a type="button" th:href="@{/quiz}" class="btn btn-warning">Tham gia tư vấn</a>
+			</form>
+		</div>
+	</div>
+	
+	<!-- Importing Footer -->
+	<div th:insert="~{footer.html :: footer}"></div>
+	
+	<!-- Bootstrap JS -->
+	<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

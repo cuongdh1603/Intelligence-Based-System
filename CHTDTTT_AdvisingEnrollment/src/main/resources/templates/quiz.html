@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+	<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+	<link rel="stylesheet" th:href="@{/css/quiz.css}">
+	<title>Quiz Page</title>
+</head>
+<body>
+
+	<!-- Importing NavBar -->
+	<div th:insert="~{navbar.html :: navbar}"></div>
+	
+	<div class="container py-5 px-4">
+		<h1 class="bg-danger text-light">
+			Bộ câu hỏi đánh giá
+			<br>
+			<span style="font-size: 18px;">( Hãy lựa chọn phương án bạn cảm thấy phù hợp nhất với bản thân )</span >
+		</h1>
+		<form th:action="@{/submit}" th:object="${form}" method="post">  
+		
+			<div class="ques-box bg-dark text-light" th:each="ans, i: ${form.trainingAnswers}">
+			
+				<p class="title" th:text="${i.count + '. '+ ans.question.content}"></p>
+				
+				<div class="option">
+					<input type="radio" th:name="|trainingAnswers[${i.index}].choose|" th:value="0" th:checked="${ans.choose==0}" />
+					<label th:text="${ans.choices[0].content}"></label>
+				</div>
+				<div class="option">
+					<input type="radio" th:name="|trainingAnswers[${i.index}].choose|" th:value="1" th:checked="${ans.choose==1}"/>
+					<label th:text="${ans.choices[1].content}"></label>
+				</div>
+				<div class="option" th:if="${ans.choices.size()>2}">
+					<input type="radio" th:name="|trainingAnswers[${i.index}].choose|" th:value="2" th:checked="${ans.choose==2}"/>
+					<label th:text="${ans.choices[2].content}"></label>
+				</div>
+				<div class="option" th:if="${ans.choices.size()>3}">
+					<input type="radio" th:name="|trainingAnswers[${i.index}].choose|" th:value="3" th:checked="${ans.choose==3}"/>
+					<label th:text="${ans.choices[3].content}"></label>
+				</div>
+				
+			</div>
+			
+         	<div class="ques-box bg-dark text-light" th:each="ans, i: ${form.hollandAnswers}">
+				<p class="title" th:text="${i.count + '. '+ ans.question.content}"></p>
+				<div class="option">
+					<input type="radio" th:name="|hollandAnswers[${i.index}].choose|" th:checked="${ans.choose==4}" th:value="4" />
+					<label th:text="${ans.choices[0].content}"></label>
+				</div>
+				
+				<div class="option">
+					<input type="radio" th:name="|hollandAnswers[${i.index}].choose|" th:checked="${ans.choose==3}" th:value="3" />
+					<label th:text="${ans.choices[1].content}"></label>
+				</div>
+				<div class="option">
+					<input type="radio" th:name="|hollandAnswers[${i.index}].choose|" th:checked="${ans.choose==2}" th:value="2" />
+					<label th:text="${ans.choices[2].content}"></label>
+				</div>
+				<div class="option">
+					<input type="radio" th:name="|hollandAnswers[${i.index}].choose|" th:checked="${ans.choose==1}" th:value="1" />
+					<label th:text="${ans.choices[3].content}"></label>
+				</div>
+				<div class="option">
+					<input type="radio" th:name="|hollandAnswers[${i.index}].choose|" th:checked="${ans.choose==0}" th:value="0" />
+					<label th:text="${ans.choices[4].content}"></label>
+				</div>
+			</div>
+			<button type="submit" class="btn btn-danger d-block mx-auto mt-4">Nộp kết quả trả lời</button>
+        </form>
+	</div>
+	<!-- Importing Footer -->
+	<div th:insert="~{footer.html :: footer}"></div>
+	<!-- Bootstrap JS -->
+	<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>
